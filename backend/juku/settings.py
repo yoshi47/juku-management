@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 
     'accounts.apps.AccountsConfig',
+    'management.apps.ManagementConfig',
 
     'rest_framework',
 
