@@ -43,7 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email", ]
-    
+
     class UserType(models.TextChoices):
         ADMIN = "admin", _("Admin")
         TEACHER = "teacher", _("Teacher")
@@ -56,7 +56,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("役職"),
     )
 
-    subjects = models.ManyToManyField("management.Subject", verbose_name=_("やる教科"), blank=True)
+    text = models.CharField(max_length=400, verbose_name="テキスト", blank=True)
 
     class Meta:
         verbose_name = _("user")
@@ -81,6 +81,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -115,7 +116,8 @@ class Student(models.Model):
         (13, "既卒"),
     ]
 
-    grade = models.IntegerField(choices=GRADE_CHOICES, default=1, verbose_name=_("学年"))
+    grade = models.IntegerField(choices=GRADE_CHOICES, verbose_name=_("学年"))
+    subjects = models.ManyToManyField("management.Subject", verbose_name=_("やる教科"), blank=True)
 
     class Meta:
         verbose_name = _("学年")
