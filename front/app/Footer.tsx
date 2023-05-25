@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const Footer = () => {
+export function Footer() {
     return (
         <footer className="text-gray-600 body-font">
             <div className="bg-gray-100">
