@@ -23,7 +23,6 @@ export default async function StudentList() {
     const students = await getStudents();
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between">
             <div>
                 <ul>
                     {students.map((student) => (
@@ -31,7 +30,6 @@ export default async function StudentList() {
                     ))}
                 </ul>
             </div>
-        </main>
     )
 }
 

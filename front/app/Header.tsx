@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const Header = () => {
+export function Header() {
   return (
       <header className="text-gray-600 body-font">
           <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
