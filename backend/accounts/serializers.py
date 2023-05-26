@@ -10,9 +10,11 @@ class BaseStudentSerializer(serializers.ModelSerializer):
 
 class StudentSerializer(serializers.ModelSerializer):
     student = BaseStudentSerializer()
+    grade = serializers.CharField(source='student.get_grade_display', read_only=True)
+
     class Meta:
         model = User
-        fields = ('username', 'last_name', 'first_name', 'email', 'student', 'text',)
+        fields = ('username', 'last_name', 'first_name', 'email', 'grade', 'student', 'text',)
 
 
 class TeacherSerializer(serializers.ModelSerializer):

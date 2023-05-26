@@ -40,10 +40,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-    EMAIL_FIELD = "email"
-    USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["email", ]
-
     class UserType(models.TextChoices):
         ADMIN = "admin", _("Admin")
         TEACHER = "teacher", _("Teacher")
@@ -57,6 +53,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     text = models.CharField(max_length=400, verbose_name="テキスト", blank=True)
+
+    EMAIL_FIELD = "email"
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["email", "user_type"]
 
     class Meta:
         verbose_name = _("user")
