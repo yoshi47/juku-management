@@ -85,6 +85,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    school = models.ForeignKey("management.School", on_delete=models.PROTECT, verbose_name=_("学校"), null=True, blank=True)
     GRADE_CHOICES = [
         (
             "小学校",

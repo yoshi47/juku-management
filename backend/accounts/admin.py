@@ -8,11 +8,7 @@ from .models import User, Student
 # Register your models here.
 class StudentInline(admin.StackedInline):
     model = Student
-
-
-# @admin.register(Student)
-# class StudentAdmin(admin.ModelAdmin):
-#     pass
+    extra = 1
 
 
 @admin.register(User)
@@ -23,8 +19,8 @@ class UserAdmin(BaseUserAdmin):
         (_('Permissions'), {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
         (_('Important dates'), {"fields": ("last_login", "date_joined")}),
     )
-    list_display = ("username", "full_name", "user_type", "person_grade")
-    list_filter = ["user_type", "student__grade"]
+    list_display = ("username", "full_name", "user_type", "person_grade", "person_school")
+    list_filter = ["user_type", "student__grade", "student__school"]
     search_fields = ("username", "last_name", "first_name", "email")
     filter_horizontal = ("groups", "user_permissions")
 
@@ -37,3 +33,6 @@ class UserAdmin(BaseUserAdmin):
 
     def person_grade(self, obj):
         return obj.student.grade
+
+    def person_school(self, obj):
+        return obj.student.school
