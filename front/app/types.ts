@@ -5,9 +5,9 @@ export type Student = {
     last_name: string;
     first_name: string;
     email: string;
-    grade: string;
     info: {
-        grade: number;
+        school: string;
+        grade: string;
         subject: [string];
     }
     text: string;
