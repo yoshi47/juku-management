@@ -27,3 +27,13 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = _('授業')
         verbose_name_plural = _('授業')
+
+class School(models.Model):
+    name = models.CharField(_('学校名'), max_length=30)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('学校')
+        verbose_name_plural = _('学校')
