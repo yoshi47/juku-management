@@ -2,7 +2,7 @@ import {notFound} from "next/navigation";
 import {Lesson, Student} from "@/app/types";
 
 async function getStudentInfo(username: string) {
-    const res = await fetch(`http://django:8000/api/students/${username}`, {
+    const res = await fetch(`${process.env.HOST}/api/students/${username}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ async function getStudentInfo(username: string) {
 }
 
 async function getStudentSchedule(username: string) {
-    const res = await fetch(`http://django:8000/api/lessons/?username=${username}`, {
+    const res = await fetch(`${process.env.HOST}/api/lessons/?username=${username}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export default async function StudentPage({
             <p>{student.last_name} {student.first_name}</p>
             <ul>
                 {schedule.map((lesson) => (
-                    <li key={lesson.id}>{lesson.period}</li>
+                    <li key={lesson.id}>{lesson.date} {lesson.period}限 教科: {lesson.subject} 先生: {lesson.teacher}</li>
                     ))}
             </ul>
         </div>

@@ -3,7 +3,8 @@ import {Main} from "next/document";
 import {METHODS} from "http";
 
 async function getStudents() {
-    const res = await fetch('http://django:8000/api/students', {
+    // const res = await fetch(process.env.HOST + '/api/students', {
+    const res = await fetch(`${process.env.HOST}/api/students`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

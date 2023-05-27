@@ -20,5 +20,5 @@ export type Lesson = {
     teacher: string;
     subject: string;
     period: number;
-    date: Date;
+    date: string;
 }
