@@ -20,11 +20,4 @@ class StudentViewSet(viewsets.ModelViewSet):
 class LessonViewSet(viewsets.ModelViewSet):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
-    lookup_field = "student__username"
 
-    # def get_queryset(self):
-    #     queryset = Lesson.objects.all()
-    #     username = self.request.query_params.get('username', None)
-    #     if username:
-    #         queryset = queryset.filter(student__username=username)
-    #     return queryset
