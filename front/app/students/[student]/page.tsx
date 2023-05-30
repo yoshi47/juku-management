@@ -31,11 +31,16 @@ async function getStudentSchedule(username: string) {
         throw new Error("Failed to fetch schedule");
     }
 
-    const data = await res.json();
-    data.date = new Date(data.date);
-    const month = data.date.getMonth() + 1;
-    const day = data.date.getDate();
-    data.date = `${month}/${day}`;
+    let data = await res.json();
+    data = data.map((item: Lesson) => {
+        const date = new Date(item.date);
+        const formattedDate = `${date.getMonth() + 1}/${date.getDate()}`;
+        return {
+            ...item,
+            date: formattedDate,
+        };
+    });
+
     return data as Lesson[];
 }
 
