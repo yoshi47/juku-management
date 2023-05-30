@@ -1,5 +1,5 @@
 import {notFound} from "next/navigation";
-import {Lesson, Student} from "@/app/types";
+import {Lesson, Student} from "types";
 
 async function getStudentInfo(username: string) {
     const res = await fetch(`${process.env.HOST}/api/students/${username}`, {

@@ -1,4 +1,4 @@
-import {Student} from "@/app/types";
+import {Student} from "types";
 import {Main} from "next/document";
 import {METHODS} from "http";
 
