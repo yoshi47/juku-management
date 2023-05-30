@@ -9,7 +9,8 @@ async function getStudents() {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-        }
+        },
+        cache: 'no-cache',
     });
 
     if (!res.ok) {
@@ -35,7 +36,7 @@ export default async function StudentList() {
                     <li key={student.username}
                         className="w-full border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50 text-center">
                         <Link href={`/students/${student.username}`}>
-                            {student.student.school} {student.student.grade} {student.last_name} {student.first_name}
+                            {student.student.school} {student.student.grade}  {student.last_name} {student.first_name}
                         </Link>
                     </li>
                 ))}

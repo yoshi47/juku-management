@@ -19,7 +19,7 @@ async function getStudentInfo(username: string) {
 }
 
 async function getStudentSchedule(username: string) {
-    const res = await fetch(`${process.env.HOST}/api/lessons/?username=${username}`, {
+    const res = await fetch(`${process.env.HOST}/api/lessons/?student_username=${username}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
