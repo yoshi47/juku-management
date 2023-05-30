@@ -11,6 +11,7 @@ from .serializers import LessonSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.filter(user_type__in=["admin", "teacher"])
     serializer_class = TeacherSerializer
+    lookup_field = "username"
 
 
 class StudentViewSet(viewsets.ModelViewSet):

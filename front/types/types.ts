@@ -13,9 +13,18 @@ export type Student = {
     text: string;
 };
 
+export type Teacher = {
+    username: string;
+    last_name: string;
+    first_name: string;
+    email: string;
+    text: string;
+};
+
 export type Lesson = {
     id: number;
-    username: string;
+    student_username: string;
+    teacher_username: string;
     student: string;
     teacher: string;
     subject: string;
