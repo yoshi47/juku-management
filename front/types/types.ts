@@ -5,7 +5,7 @@ export type Student = {
     last_name: string;
     first_name: string;
     email: string;
-    info: {
+    student: {
         school: string;
         grade: string;
         subject: [string];
