@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
+import jwt from "jsonwebtoken";
 
 
 const handler = NextAuth({
@@ -11,24 +12,49 @@ const handler = NextAuth({
                 password: {label: "Password", type: "password"}
             },
             async authorize(credentials, req) {
-                const res = await fetch("http://django:8000/api/token/", {
+                const res = await fetch(`${process.env.HOST}/api/token/`, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(credentials),
                 });
 
-                const user = await res.json();
+                const data = await res.json();
+                const user = jwt.verify(data.access, process.env.NEXTAUTH_SECRET)
+
                 if (res.ok && user) {
-                    return user;
+                    return {...data, user};
                 } else {
                     return null;
                 }
             },
         }),
     ],
+    secret: process.env.NEXTAUTH_SECRET,
     session: {
         strategy: "jwt",
     },
+    callbacks: {
+        async jwt({token, user, account}) {
+            if (account) {
+                token.user = user.user
+
+                token.accessToken = user.access
+                token.refreshToken = user.refresh
+            }
+            return token
+        },
+        async session({session, token}) {
+            if (token) {
+                session.user = {...token.user}
+                session.accessToken = token.accessToken
+                session.refreshToken = token.refreshToken
+            }
+            return session
+        },
+    },
+    jwt: {
+        secret: process.env.NEXTAUTH_SECRET,
+    }
 })
 
 export {handler as GET, handler as POST};

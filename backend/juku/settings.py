@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_$odm2xs8_39a$o()m=eb($1m&xy23-07$2s%m_xp4t81ij@)x'
+SECRET_KEY = '291af5ed1c16dd9a7a3c6adadd43362e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -142,5 +142,5 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-
+    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.MyTokenObtainPairSerializer",
 }

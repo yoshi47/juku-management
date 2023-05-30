@@ -1,23 +1,26 @@
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import {useSession, signIn, signOut} from "next-auth/react";
 
 export function LoginBtn() {
-    const { data: session } = useSession();
+    const {data: session} = useSession();
     if (session) {
         return (
-            <button
-                onClick={() => signOut()}
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            >
-                Logout
-            </button>
+            <>
+                <span className="text-black text-lg font-bold inline-flex items-center mr-3">{session.user.name}</span>
+                <button
+                    onClick={() => signOut()}
+                    className="inline-flex items-center bg-gray-100 hover:bg-gray-200 py-1 px-3 rounded"
+                >
+                    Logout
+                </button>
+            </>
         );
     } else {
         return (
             <button
                 onClick={() => signIn()}
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                className="inline-flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded"
             >
                 Login
             </button>
