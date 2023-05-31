@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials";
-import jwt from "jsonwebtoken";
+import CredentialsProvider from "next-auth/providers/credentials"
+import jwt from "jsonwebtoken"
 
 
 const handler = NextAuth({
@@ -20,7 +20,6 @@ const handler = NextAuth({
 
                 const data = await res.json();
                 const user = jwt.verify(data.access, process.env.NEXTAUTH_SECRET)
-
                 if (res.ok && user) {
                     return {...data, user};
                 } else {
@@ -51,10 +50,10 @@ const handler = NextAuth({
             }
             return session
         },
+        async redirect({url, baseUrl}) {
+            return baseUrl
+        },
     },
-    jwt: {
-        secret: process.env.NEXTAUTH_SECRET,
-    }
 })
 
 export {handler as GET, handler as POST};
