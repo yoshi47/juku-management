@@ -36,7 +36,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 # DEBUG = True
 
-ALLOWED_HOSTS = ['django', 'localhost']
+ALLOWED_HOSTS = ['django', 'localhost', 'juku.herokuapp.com']
 
 
 # Application definition
@@ -148,3 +148,6 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.MyTokenObtainPairSerializer",
 }
+
+import django_heroku
+django_heroku.settings(locals())
