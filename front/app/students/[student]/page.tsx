@@ -1,5 +1,5 @@
-import {notFound} from "next/navigation";
-import {Lesson, Student} from "types";
+import { notFound } from "next/navigation";
+import { Lesson, Student } from "types";
 
 async function getStudentInfo(username: string) {
     const res = await fetch(`${process.env.HOST}/api/students/${username}`, {
@@ -44,7 +44,7 @@ async function getStudentSchedule(username: string) {
     return data as Lesson[];
 }
 
-export default async function StudentPage({params,}: { params: { student: string }; }) {
+export default async function StudentPage({ params, }: { params: { student: string }; }) {
     const studentPromise = getStudentInfo(params.student);
     const schedulePromise = getStudentSchedule(params.student);
 

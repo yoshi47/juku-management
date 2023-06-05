@@ -1,6 +1,5 @@
-import Link from "next/link";
 
-export function Main({children}: {children: React.ReactNode}) {
+export function Main({ children }: { children: React.ReactNode }) {
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             {children}

@@ -1,9 +1,12 @@
-import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
+import { UserInfo } from "@/@types/types"
 import jwt from "jsonwebtoken"
+import NextAuth, {AuthOptions} from "next-auth"
+import CredentialsProvider from "next-auth/providers/credentials"
 
+const SECRET: string = process.env.NEXTAUTH_SECRET
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = ({
+// const handler = NextAuth({
     providers: [
         CredentialsProvider({
             name: "next-auth",
@@ -19,7 +22,7 @@ const handler = NextAuth({
                 });
 
                 const data = await res.json();
-                const user = jwt.verify(data.access, process.env.NEXTAUTH_SECRET)
+                const user = jwt.verify(data.access, SECRET) as UserInfo;
                 if (res.ok && user) {
                     return {...data, user};
                 } else {
@@ -35,8 +38,7 @@ const handler = NextAuth({
     callbacks: {
         async jwt({token, user, account}) {
             if (account) {
-                token.user = user.user
-
+                token.user = {...user.user}
                 token.accessToken = user.access
                 token.refreshToken = user.refresh
             }
@@ -56,4 +58,5 @@ const handler = NextAuth({
     },
 })
 
-export {handler as GET, handler as POST};
+const handler = NextAuth(authOptions)
+export { handler as GET, handler as POST }

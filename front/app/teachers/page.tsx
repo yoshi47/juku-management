@@ -1,7 +1,5 @@
-import {Student, Teacher} from "types";
-import {Main} from "next/document";
-import {METHODS} from "http";
 import Link from "next/link";
+import { Teacher } from "types";
 
 async function getTeachers() {
     const res = await fetch(`${process.env.HOST}/api/teachers`, {

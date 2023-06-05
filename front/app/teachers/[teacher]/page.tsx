@@ -1,5 +1,5 @@
-import {notFound} from "next/navigation";
-import {Lesson, Student, Teacher} from "types";
+import { notFound } from "next/navigation";
+import { Lesson, Teacher } from "types";
 
 async function getTeacherInfo(username: string) {
     const res = await fetch(`${process.env.HOST}/api/teachers/${username}`, {
@@ -44,7 +44,7 @@ async function getTeacherSchedule(username: string) {
     return data as Lesson[];
 }
 
-export default async function TeacherPage({params,}: { params: { teacher: string }; }) {
+export default async function TeacherPage({ params, }: { params: { teacher: string }; }) {
     const teacherPromise = getTeacherInfo(params.teacher);
     const schedulePromise = getTeacherSchedule(params.teacher);
 
