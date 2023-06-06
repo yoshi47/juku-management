@@ -11,21 +11,32 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import datetime
 from pathlib import Path
+import environ
+import os
+
+env = environ.Env(
+    DEBUG=(bool, True),
+    SECRET_KEY=(str, '291af5ed1c16dd9a7a3c6adadd43362e'),
+    DATABASE_URL=(str, 'psql://root:password@db:5432/postgres'),
+)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_$odm2xs8_39a$o()m=eb($1m&xy23-07$2s%m_xp4t81ij@)x'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
+# DEBUG = True
 
-ALLOWED_HOSTS = ['django', 'localhost']
+ALLOWED_HOSTS = ['django', 'localhost', '.herokuapp.com']
 
 
 # Application definition
@@ -81,14 +92,7 @@ WSGI_APPLICATION = 'juku.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': 'db',
-        'PORT': '5432',
-    }
+    'default': env.db(),
 }
 
 
@@ -142,5 +146,5 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-
+    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.MyTokenObtainPairSerializer",
 }
